@@ -1,7 +1,5 @@
 const functionForJSON = (responseObject) => responseObject.json();
 
-const runApplication = () => {};
-
 const handleErrors = () => {};
 
 const requestServerData = (url, whatFunction) => {
@@ -40,11 +38,14 @@ const renderCityCard = (dataFromServer) => {
   return requestCityForecast(lonLatObject);
 };
 
-const requestCityForecast = (lonLatObject) => {
-  console.log(lonLatObject);
+const renderForecast = (dataFromServer) => {
+  console.log(dataFromServer);
 };
 
-const renderForecast = (city) => {};
+const requestCityForecast = (lonLatObject) => {
+  const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lonLatObject.lat}&lon=${lonLatObject.lon}&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
+  requestServerData(forecastURL, renderForecast);
+};
 
 const requestCityCurrentWeather = (city) => {
   const currentDayURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
