@@ -16,9 +16,14 @@ const onReady = () => {
 
 const searchCityWeather = (event) => {
   event.preventDefault();
+  const target = $(event.target);
+  let currentCity = "";
   if (event.target.nodeName === "BUTTON") {
+    const inputField = target.parent().children("input");
+    currentCity = inputField.val();
+    inputField.val("");
     console.log("clicked");
-    console.log(event);
+    console.log(currentCity);
   }
 };
 
