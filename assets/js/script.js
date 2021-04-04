@@ -1,12 +1,8 @@
 const functionForJSON = (responseObject) => responseObject.json();
 
-const runApplication = () => {
-  console.log("data downloaded");
-};
+const runApplication = () => {};
 
-const handleErrors = () => {
-  console.log("something went wrong");
-};
+const handleErrors = () => {};
 
 const requestServerData = (url) => {
   fetch(url).then(functionForJSON).then(runApplication).catch(handleErrors);
@@ -18,4 +14,10 @@ const onReady = () => {
   requestServerData(myURL);
 };
 
+const searchCityWeather = (event) => {
+  event.preventDefault();
+  console.log("clicked");
+};
+
 $("document").ready(onReady);
+$("#search-city").on("click", searchCityWeather);
