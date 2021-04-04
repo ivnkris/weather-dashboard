@@ -66,15 +66,15 @@ const renderForecast = (dataFromServer) => {
     <div class="card-header">${dayDate}</div>
     <div class="card-body">
       <p><span><img src="http://openweathermap.org/img/w/${dataFromServer.daily[i].weather[0].icon}.png"></span></p>
-      <p>Temp: <span>placeholder temp</span></p>
-      <p>Humidity: <span>placeholder humidity</span></p>
+      <p>Temp: <span>${dataFromServer.daily[i].temp.day} °C</span></p>
+      <p>Humidity: <span>${dataFromServer.daily[i].humidity}%</span></p>
     </div>
   </div>`);
   }
 };
 
 const requestCityForecast = (lonLatObject) => {
-  const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lonLatObject.lat}&lon=${lonLatObject.lon}&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
+  const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lonLatObject.lat}&lon=${lonLatObject.lon}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
   requestServerData(forecastURL, renderForecast);
 };
 
