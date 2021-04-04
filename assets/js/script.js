@@ -14,6 +14,14 @@ const onReady = () => {
   requestServerData(myURL);
 };
 
+const renderCityCard = (city) => {
+  console.log(city);
+};
+
+const renderForecast = (city) => {
+  console.log(city);
+};
+
 const searchCityWeather = (event) => {
   event.preventDefault();
   const target = $(event.target);
@@ -22,8 +30,8 @@ const searchCityWeather = (event) => {
     const inputField = target.parent().children("input");
     currentCity = inputField.val();
     inputField.val("");
-    console.log("clicked");
-    console.log(currentCity);
+    renderCityCard(currentCity);
+    renderForecast(currentCity);
   }
 };
 
