@@ -29,15 +29,26 @@ const renderCityCard = (dataFromServer) => {
 </p>
 <p class="my-3 p-2">
   UV Index:
-  <span class="bg-danger p-2 rounded">placeholder UV Index</span>
+  <span id="uv-index" class="p-2 rounded"></span>
 </p>`);
+
+  const lonLatObject = {
+    lon: dataFromServer.coord.lon,
+    lat: dataFromServer.coord.lat,
+  };
+
+  return requestCityForecast(lonLatObject);
+};
+
+const requestCityForecast = (lonLatObject) => {
+  console.log(lonLatObject);
 };
 
 const renderForecast = (city) => {};
 
 const requestCityCurrentWeather = (city) => {
-  const myURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
-  requestServerData(myURL, renderCityCard);
+  const currentDayURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
+  requestServerData(currentDayURL, renderCityCard);
 };
 
 const searchCityWeather = (event) => {
@@ -49,7 +60,6 @@ const searchCityWeather = (event) => {
     currentCity = inputField.val();
     inputField.val("");
     requestCityCurrentWeather(currentCity);
-    renderForecast(currentCity);
   }
 };
 
