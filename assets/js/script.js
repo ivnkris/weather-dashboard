@@ -16,7 +16,10 @@ const onReady = () => {
 
 const searchCityWeather = (event) => {
   event.preventDefault();
-  console.log("clicked");
+  if (event.target.nodeName === "BUTTON") {
+    console.log("clicked");
+    console.log(event);
+  }
 };
 
 $("document").ready(onReady);
