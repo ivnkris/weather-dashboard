@@ -12,6 +12,20 @@ const onReady = () => {};
 
 const renderCityCard = (dataFromServer) => {
   console.log(dataFromServer);
+  $("#current-weather").append(`<h2 class="my-2 p-2">
+  ${dataFromServer.name} <span>date </span><span><img src="http://openweathermap.org/img/w/${dataFromServer.weather[0].icon}.png"></span>
+</h2>
+<p class="my-3 p-2">
+  Temperature: <span>placeholder temperature</span>
+</p>
+<p class="my-3 p-2">Humidity: <span>placeholder humidity</span></p>
+<p class="my-3 p-2">
+  Wind Speed: <span>placeholder wind speed</span>
+</p>
+<p class="my-3 p-2">
+  UV Index:
+  <span class="bg-danger p-2 rounded">placeholder UV Index</span>
+</p>`);
 };
 
 const renderForecast = (city) => {};
