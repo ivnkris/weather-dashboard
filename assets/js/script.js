@@ -11,16 +11,21 @@ const requestServerData = (url, whatFunction) => {
 const onReady = () => {};
 
 const renderCityCard = (dataFromServer) => {
-  console.log(dataFromServer);
   $("#current-weather").append(`<h2 class="my-2 p-2">
-  ${dataFromServer.name} <span>date </span><span><img src="http://openweathermap.org/img/w/${dataFromServer.weather[0].icon}.png"></span>
+  ${
+    dataFromServer.name
+  } <span>date </span><span><img src="http://openweathermap.org/img/w/${
+    dataFromServer.weather[0].icon
+  }.png"></span>
 </h2>
 <p class="my-3 p-2">
-  Temperature: <span>placeholder temperature</span>
+  Temperature: <span>${dataFromServer.main.temp} °C</span>
 </p>
-<p class="my-3 p-2">Humidity: <span>placeholder humidity</span></p>
+<p class="my-3 p-2">Humidity: <span>${dataFromServer.main.humidity}%</span></p>
 <p class="my-3 p-2">
-  Wind Speed: <span>placeholder wind speed</span>
+  Wind Speed: <span>${
+    Math.round(dataFromServer.wind.speed * 2.237 * 100) / 100
+  } MPH</span>
 </p>
 <p class="my-3 p-2">
   UV Index:
@@ -31,7 +36,7 @@ const renderCityCard = (dataFromServer) => {
 const renderForecast = (city) => {};
 
 const requestCityCurrentWeather = (city) => {
-  const myURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
+  const myURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
   requestServerData(myURL, renderCityCard);
 };
 
