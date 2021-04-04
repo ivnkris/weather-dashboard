@@ -9,10 +9,11 @@ const requestServerData = (url, whatFunction) => {
 const onReady = () => {};
 
 const renderCityCard = (dataFromServer) => {
+  const currentDate = moment().format("L");
   $("#current-weather").append(`<h2 class="my-2 p-2">
   ${
     dataFromServer.name
-  } <span>date </span><span><img src="http://openweathermap.org/img/w/${
+  } <span>(${currentDate}) </span><span><img src="http://openweathermap.org/img/w/${
     dataFromServer.weather[0].icon
   }.png"></span>
 </h2>
