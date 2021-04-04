@@ -39,7 +39,7 @@ const renderCityCard = (dataFromServer) => {
 };
 
 const renderForecast = (dataFromServer) => {
-  console.log(dataFromServer);
+  $("#uv-index").text(dataFromServer.current.uvi);
 };
 
 const requestCityForecast = (lonLatObject) => {
