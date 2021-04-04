@@ -6,10 +6,13 @@ const requestServerData = (url, whatFunction) => {
   fetch(url).then(functionForJSON).then(whatFunction).catch(handleErrors);
 };
 
+const renderSearchCards = (array) => {};
+
 const onReady = () => {
   const previousSearchesMemory = localStorage.getItem("previousSearches");
   if (previousSearchesMemory !== null) {
     let previousSearchesArray = JSON.parse(previousSearchesMemory);
+    renderSearchCards(previousSearchesArray);
   }
 };
 
@@ -25,6 +28,7 @@ const addCityToSearches = (city) => {
   }
   const uploadToMemory = JSON.stringify(previousSearchesArray);
   localStorage.setItem("previousSearches", uploadToMemory);
+  renderSearchCards(previousSearchesArray);
 };
 
 const renderCityCard = (dataFromServer) => {
