@@ -56,52 +56,22 @@ const renderForecast = (dataFromServer) => {
   }
   $("#weather-forecast").empty();
   $("#weather-forecast").append(`<h2>5-Day Forecast:</h2>
-  <div class="d-flex flex-wrap">
-    <div class="card m-2">
-      <div class="card-header">Placeholder Date</div>
-      <div class="card-body">
-        <p><span>icon</span></p>
-        <p>Temp: <span>placeholder temp</span></p>
-        <p>Humidity: <span>placeholder humidity</span></p>
-      </div>
-    </div>
+  <div class="d-flex flex-wrap" id="cards-container">
+  </div>`);
 
-    <div class="card m-2">
-      <div class="card-header">Placeholder Date</div>
-      <div class="card-body">
-        <p><span>icon</span></p>
-        <p>Temp: <span>placeholder temp</span></p>
-        <p>Humidity: <span>placeholder humidity</span></p>
-      </div>
-    </div>
-
-    <div class="card m-2">
-      <div class="card-header">Placeholder Date</div>
-      <div class="card-body">
-        <p><span>icon</span></p>
-        <p>Temp: <span>placeholder temp</span></p>
-        <p>Humidity: <span>placeholder humidity</span></p>
-      </div>
-    </div>
-
-    <div class="card m-2">
-      <div class="card-header">Placeholder Date</div>
-      <div class="card-body">
-        <p><span>icon</span></p>
-        <p>Temp: <span>placeholder temp</span></p>
-        <p>Humidity: <span>placeholder humidity</span></p>
-      </div>
-    </div>
-
-    <div class="card m-2">
-      <div class="card-header">Placeholder Date</div>
-      <div class="card-body">
-        <p><span>icon</span></p>
-        <p>Temp: <span>placeholder temp</span></p>
-        <p>Humidity: <span>placeholder humidity</span></p>
-      </div>
+  for (let i = 1; i < 6; i++) {
+    const dayForecastDate = dataFromServer.daily[i].dt;
+    const dayDate = moment(dayForecastDate * 1000).format("L");
+    console.log(dayDate);
+    $("#weather-forecast").children().next().append(`<div class="card m-2">
+    <div class="card-header">${dayDate}</div>
+    <div class="card-body">
+      <p><span>icon</span></p>
+      <p>Temp: <span>placeholder temp</span></p>
+      <p>Humidity: <span>placeholder humidity</span></p>
     </div>
   </div>`);
+  }
 };
 
 const requestCityForecast = (lonLatObject) => {
