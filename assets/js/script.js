@@ -6,6 +6,17 @@ const requestServerData = (url, whatFunction) => {
   fetch(url).then(functionForJSON).then(whatFunction).catch(handleErrors);
 };
 
+const requestCityCurrentWeather = (city) => {
+  const currentDayURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
+  requestServerData(currentDayURL, renderCityCard);
+};
+
+const searchPreviousCity = (event) => {
+  const target = $(event.target);
+  let currentCity = target[0].innerHTML;
+  requestCityCurrentWeather(currentCity);
+};
+
 const renderSearchCards = (array) => {
   $("#search-cards-container").empty();
   const renderCard = (index) => {
@@ -15,6 +26,7 @@ const renderSearchCards = (array) => {
     );
   };
   $(array).each(renderCard);
+  $("#search-cards-container").on("click", searchPreviousCity);
 };
 
 const onReady = () => {
@@ -110,12 +122,6 @@ const requestCityForecast = (lonLatObject) => {
   requestServerData(forecastURL, renderForecast);
 };
 
-const requestCityCurrentWeather = (city) => {
-  const currentDayURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
-  requestServerData(currentDayURL, renderCityCard);
-  addCityToSearches(city);
-};
-
 const searchCityWeather = (event) => {
   event.preventDefault();
   const target = $(event.target);
@@ -124,6 +130,7 @@ const searchCityWeather = (event) => {
     const inputField = target.parent().children("input");
     currentCity = inputField.val();
     inputField.val("");
+    addCityToSearches(currentCity);
     requestCityCurrentWeather(currentCity);
   }
 };
