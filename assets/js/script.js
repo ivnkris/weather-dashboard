@@ -9,6 +9,7 @@ const requestServerData = (url, whatFunction) => {
 const onReady = () => {};
 
 const renderCityCard = (dataFromServer) => {
+  $("#current-weather").empty();
   const currentDate = moment().format("L");
   $("#current-weather").append(`<h2 class="my-2 p-2">
   ${
