@@ -6,7 +6,26 @@ const requestServerData = (url, whatFunction) => {
   fetch(url).then(functionForJSON).then(whatFunction).catch(handleErrors);
 };
 
-const onReady = () => {};
+const onReady = () => {
+  const previousSearchesMemory = localStorage.getItem("previousSearches");
+  if (previousSearchesMemory !== null) {
+    let previousSearchesArray = JSON.parse(previousSearchesMemory);
+  }
+};
+
+const addCityToSearches = (city) => {
+  const previousSearchesMemory = localStorage.getItem("previousSearches");
+  let previousSearchesArray = [];
+  if (previousSearchesMemory !== null) {
+    previousSearchesArray = JSON.parse(previousSearchesMemory);
+  }
+  previousSearchesArray.unshift(city);
+  if (previousSearchesArray.length > 10) {
+    previousSearchesArray.pop();
+  }
+  const uploadToMemory = JSON.stringify(previousSearchesArray);
+  localStorage.setItem("previousSearches", uploadToMemory);
+};
 
 const renderCityCard = (dataFromServer) => {
   $("#current-weather").empty();
@@ -81,6 +100,7 @@ const requestCityForecast = (lonLatObject) => {
 const requestCityCurrentWeather = (city) => {
   const currentDayURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
   requestServerData(currentDayURL, renderCityCard);
+  addCityToSearches(city);
 };
 
 const searchCityWeather = (event) => {
