@@ -54,6 +54,54 @@ const renderForecast = (dataFromServer) => {
       $("#uv-index").addClass("bg-danger");
       break;
   }
+  $("#weather-forecast").empty();
+  $("#weather-forecast").append(`<h2>5-Day Forecast:</h2>
+  <div class="d-flex flex-wrap">
+    <div class="card m-2">
+      <div class="card-header">Placeholder Date</div>
+      <div class="card-body">
+        <p><span>icon</span></p>
+        <p>Temp: <span>placeholder temp</span></p>
+        <p>Humidity: <span>placeholder humidity</span></p>
+      </div>
+    </div>
+
+    <div class="card m-2">
+      <div class="card-header">Placeholder Date</div>
+      <div class="card-body">
+        <p><span>icon</span></p>
+        <p>Temp: <span>placeholder temp</span></p>
+        <p>Humidity: <span>placeholder humidity</span></p>
+      </div>
+    </div>
+
+    <div class="card m-2">
+      <div class="card-header">Placeholder Date</div>
+      <div class="card-body">
+        <p><span>icon</span></p>
+        <p>Temp: <span>placeholder temp</span></p>
+        <p>Humidity: <span>placeholder humidity</span></p>
+      </div>
+    </div>
+
+    <div class="card m-2">
+      <div class="card-header">Placeholder Date</div>
+      <div class="card-body">
+        <p><span>icon</span></p>
+        <p>Temp: <span>placeholder temp</span></p>
+        <p>Humidity: <span>placeholder humidity</span></p>
+      </div>
+    </div>
+
+    <div class="card m-2">
+      <div class="card-header">Placeholder Date</div>
+      <div class="card-body">
+        <p><span>icon</span></p>
+        <p>Temp: <span>placeholder temp</span></p>
+        <p>Humidity: <span>placeholder humidity</span></p>
+      </div>
+    </div>
+  </div>`);
 };
 
 const requestCityForecast = (lonLatObject) => {
