@@ -62,11 +62,10 @@ const renderForecast = (dataFromServer) => {
   for (let i = 1; i < 6; i++) {
     const dayForecastDate = dataFromServer.daily[i].dt;
     const dayDate = moment(dayForecastDate * 1000).format("L");
-    console.log(dayDate);
     $("#weather-forecast").children().next().append(`<div class="card m-2">
     <div class="card-header">${dayDate}</div>
     <div class="card-body">
-      <p><span>icon</span></p>
+      <p><span><img src="http://openweathermap.org/img/w/${dataFromServer.daily[i].weather[0].icon}.png"></span></p>
       <p>Temp: <span>placeholder temp</span></p>
       <p>Humidity: <span>placeholder humidity</span></p>
     </div>
