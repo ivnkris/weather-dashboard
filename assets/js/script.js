@@ -4,22 +4,21 @@ const runApplication = () => {};
 
 const handleErrors = () => {};
 
-const requestServerData = (url) => {
-  fetch(url).then(functionForJSON).then(runApplication).catch(handleErrors);
+const requestServerData = (url, whatFunction) => {
+  fetch(url).then(functionForJSON).then(whatFunction).catch(handleErrors);
 };
 
-const onReady = () => {
-  const myURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=birmingham&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1";
-  requestServerData(myURL);
+const onReady = () => {};
+
+const renderCityCard = (dataFromServer) => {
+  console.log(dataFromServer);
 };
 
-const renderCityCard = (city) => {
-  console.log(city);
-};
+const renderForecast = (city) => {};
 
-const renderForecast = (city) => {
-  console.log(city);
+const requestCityCurrentWeather = (city) => {
+  const myURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
+  requestServerData(myURL, renderCityCard);
 };
 
 const searchCityWeather = (event) => {
@@ -30,7 +29,7 @@ const searchCityWeather = (event) => {
     const inputField = target.parent().children("input");
     currentCity = inputField.val();
     inputField.val("");
-    renderCityCard(currentCity);
+    requestCityCurrentWeather(currentCity);
     renderForecast(currentCity);
   }
 };
