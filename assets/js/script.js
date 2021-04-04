@@ -6,7 +6,16 @@ const requestServerData = (url, whatFunction) => {
   fetch(url).then(functionForJSON).then(whatFunction).catch(handleErrors);
 };
 
-const renderSearchCards = (array) => {};
+const renderSearchCards = (array) => {
+  $("#search-cards-container").empty();
+  const renderCard = (index) => {
+    const cityName = array[index];
+    $("#search-cards-container").append(
+      `<li class="list-group-item">${cityName}</li>`
+    );
+  };
+  $(array).each(renderCard);
+};
 
 const onReady = () => {
   const previousSearchesMemory = localStorage.getItem("previousSearches");
