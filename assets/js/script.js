@@ -39,7 +39,19 @@ const renderCityCard = (dataFromServer) => {
 };
 
 const renderForecast = (dataFromServer) => {
-  $("#uv-index").text(dataFromServer.current.uvi);
+  const uvIndex = dataFromServer.current.uvi;
+  $("#uv-index").text(uvIndex);
+  switch (true) {
+    case uvIndex <= 2:
+      $("#uv-index").addClass("bg-success");
+      break;
+    case 2 < uvIndex < 8:
+      $("#uv-index").addClass("bg-warning");
+      break;
+    case uvIndex >= 8:
+      $("#uv-index").addClass("bg-danger");
+      break;
+  }
 };
 
 const requestCityForecast = (lonLatObject) => {
