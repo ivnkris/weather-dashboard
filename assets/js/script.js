@@ -116,7 +116,7 @@ const addCityToSearches = (city) => {
 const renderCityCard = (dataFromServer) => {
   addCityToSearches(dataFromServer.name);
   $("#current-weather").empty();
-  const currentDate = moment().format("L");
+  const currentDate = moment().format("DD/MM/YYYY");
   $("#current-weather").append(`<h2 class="my-2 p-2">
   ${
     dataFromServer.name
@@ -171,7 +171,7 @@ const renderForecast = (dataFromServer) => {
 
   for (let i = 1; i < 6; i++) {
     const dayForecastDate = dataFromServer.daily[i].dt;
-    const dayDate = moment(dayForecastDate * 1000).format("L");
+    const dayDate = moment(dayForecastDate * 1000).format("DD/MM/YYYY");
     $("#weather-forecast").children().next().append(`<div class="card m-2">
     <div class="card-header">${dayDate}</div>
     <div class="card-body">
