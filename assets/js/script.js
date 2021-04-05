@@ -175,7 +175,7 @@ const renderForecast = (dataFromServer) => {
     $("#weather-forecast").children().next().append(`<div class="card m-2">
     <div class="card-header">${dayDate}</div>
     <div class="card-body">
-      <p><span><img src="http://openweathermap.org/img/w/${dataFromServer.daily[i].weather[0].icon}.png"></span></p>
+      <p><span><img src="https://openweathermap.org/img/w/${dataFromServer.daily[i].weather[0].icon}.png"></span></p>
       <p>Temp: <span>${dataFromServer.daily[i].temp.day} °C</span></p>
       <p>Humidity: <span>${dataFromServer.daily[i].humidity}%</span></p>
     </div>
