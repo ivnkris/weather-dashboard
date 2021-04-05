@@ -23,3 +23,9 @@ https://github.com/ivnkris/weather-dashboard
 https://ivnkris.github.io/weather-dashboard/
 
 ## Screenshots
+
+![Screenshot from page load with no console errors](./assets/images/on-load-no-errors.png)
+![Screenshot from city weather rendered with local storage](./assets/images/page-rendered-with-local-memory.png)
+![Screenshot from new search with city added to local storage](./assets/images/new-item-in-local-memory.png)
+![Screenshot from local storage on reload](./assets/images/local-memory-persists-on-reload.png)
+![Screenshot from error handling](./assets/images/error-handling.png)
