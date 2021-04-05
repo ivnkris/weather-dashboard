@@ -1,6 +1,16 @@
-const functionForJSON = (responseObject) => responseObject.json();
+const functionForJSON = (responseObject) => {
+  if (responseObject.status !== 200) {
+    throw new Error("Internal Server Error");
+  }
+  return responseObject.json();
+};
 
-const handleErrors = () => {};
+const handleErrors = () => {
+  $("#current-weather").empty();
+  $("#current-weather").append(`
+  <h1>Oops! Something went wrong!</h1>
+  <p>Check if the spelling of your city is correct. If the issue still persists the problem might be on our side and we are working on it to get it resolved as soon as possible.</p>`);
+};
 
 const requestServerData = (url, whatFunction) => {
   fetch(url).then(functionForJSON).then(whatFunction).catch(handleErrors);
@@ -67,6 +77,7 @@ const addCityToSearches = (city) => {
 };
 
 const renderCityCard = (dataFromServer) => {
+  addCityToSearches(dataFromServer.name);
   $("#current-weather").empty();
   const currentDate = moment().format("L");
   $("#current-weather").append(`<h2 class="my-2 p-2">
@@ -144,7 +155,6 @@ const searchCityWeather = (event) => {
     const inputField = target.parent().children("input");
     currentCity = inputField.val();
     inputField.val("");
-    addCityToSearches(currentCity);
     requestCityCurrentWeather(currentCity);
   }
 };
