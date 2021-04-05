@@ -7,6 +7,7 @@ const functionForJSON = (responseObject) => {
 
 const handleErrors = () => {
   $("#current-weather").empty();
+  $("#weather-forecast").empty();
   $("#current-weather").append(`
   <h1>Oops! Something went wrong!</h1>
   <p>Check if the spelling of your city is correct. If the issue still persists the problem might be on our side and we are working on it to get it resolved as soon as possible.</p>`);
