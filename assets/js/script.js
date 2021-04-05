@@ -34,7 +34,7 @@ const requestServerData = (url, whatFunction) => {
  * @returns n/a
  */
 const requestCityCurrentWeather = (city) => {
-  const currentDayURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
+  const currentDayURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
   requestServerData(currentDayURL, renderCityCard);
 };
 
@@ -120,7 +120,7 @@ const renderCityCard = (dataFromServer) => {
   $("#current-weather").append(`<h2 class="my-2 p-2">
   ${
     dataFromServer.name
-  } <span>(${currentDate}) </span><span><img src="http://openweathermap.org/img/w/${
+  } <span>(${currentDate}) </span><span><img src="https://openweathermap.org/img/w/${
     dataFromServer.weather[0].icon
   }.png"></span>
 </h2>
