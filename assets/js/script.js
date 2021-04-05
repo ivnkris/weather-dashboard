@@ -1,3 +1,7 @@
+/**
+ * @description converts the server API object into JSON and throws an error if server status isn't 200
+ * @returns server API object in JSON format
+ */
 const functionForJSON = (responseObject) => {
   if (responseObject.status !== 200) {
     throw new Error("Internal Server Error");
@@ -5,6 +9,10 @@ const functionForJSON = (responseObject) => {
   return responseObject.json();
 };
 
+/**
+ * @description removes previous content from page and adds error message in case if server status isn't 200
+ * @returns n/a
+ */
 const handleErrors = () => {
   $("#current-weather").empty();
   $("#weather-forecast").empty();
@@ -13,21 +21,37 @@ const handleErrors = () => {
   <p>Check if the spelling of your city is correct. If the issue still persists the problem might be on our side and we are working on it to get it resolved as soon as possible.</p>`);
 };
 
+/**
+ * @description fetches server data from selected API and runs asynchronous JavaScript logic
+ * @returns n/a
+ */
 const requestServerData = (url, whatFunction) => {
   fetch(url).then(functionForJSON).then(whatFunction).catch(handleErrors);
 };
 
+/**
+ * @description API server request to render current weather card
+ * @returns n/a
+ */
 const requestCityCurrentWeather = (city) => {
   const currentDayURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
   requestServerData(currentDayURL, renderCityCard);
 };
 
+/**
+ * @description allows user to return and render results from previous searches
+ * @returns n/a
+ */
 const searchPreviousCity = (event) => {
   const target = $(event.target);
   let currentCity = target[0].innerHTML;
   requestCityCurrentWeather(currentCity);
 };
 
+/**
+ * @description renders previous searches list items
+ * @returns previous searches tab rendered in user's browser
+ */
 const renderSearchCards = (array) => {
   $("#search-cards-container").empty();
   const renderCard = (index) => {
@@ -40,6 +64,10 @@ const renderSearchCards = (array) => {
   $("#search-cards-container").on("click", searchPreviousCity);
 };
 
+/**
+ * @description on document load get data from local storage and render previous searches tab if there were any
+ * @returns n/a
+ */
 const onReady = () => {
   const previousSearchesMemory = localStorage.getItem("previousSearches");
   if (previousSearchesMemory !== null) {
@@ -48,6 +76,10 @@ const onReady = () => {
   }
 };
 
+/**
+ * @description if city name hasn't been searched before it adds city to search bar
+ * @returns latest search rendered in top of search bar within the browser
+ */
 const addCityToSearches = (city) => {
   const previousSearchesMemory = localStorage.getItem("previousSearches");
   let previousSearchesArray = [];
@@ -77,6 +109,10 @@ const addCityToSearches = (city) => {
   renderSearchCards(previousSearchesArray);
 };
 
+/**
+ * @description renders current weather section in user's browser
+ * @returns current weather rendered in browser
+ */
 const renderCityCard = (dataFromServer) => {
   addCityToSearches(dataFromServer.name);
   $("#current-weather").empty();
@@ -110,6 +146,10 @@ const renderCityCard = (dataFromServer) => {
   return requestCityForecast(lonLatObject);
 };
 
+/**
+ * @description adds data for UVI index and renders next 5 days forecast
+ * @returns UVI data and forecast cards rendered in user's browser
+ */
 const renderForecast = (dataFromServer) => {
   const uvIndex = dataFromServer.current.uvi;
   $("#uv-index").text(uvIndex);
@@ -143,11 +183,19 @@ const renderForecast = (dataFromServer) => {
   }
 };
 
+/**
+ * @description API server request for forecast data
+ * @returns API server data object
+ */
 const requestCityForecast = (lonLatObject) => {
   const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lonLatObject.lat}&lon=${lonLatObject.lon}&units=metric&appid=524c8c0dbcbfa8a1202c6a2b9d272ee1`;
   requestServerData(forecastURL, renderForecast);
 };
 
+/**
+ * @description manages click target and sends server request for entered city
+ * @returns n/a
+ */
 const searchCityWeather = (event) => {
   event.preventDefault();
   const target = $(event.target);
@@ -160,5 +208,8 @@ const searchCityWeather = (event) => {
   }
 };
 
+// on load get data from local storage and render previous searches tab
 $("document").ready(onReady);
+
+// on click onto the search button run main application
 $("#search-city").on("click", searchCityWeather);
