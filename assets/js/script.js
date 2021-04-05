@@ -43,10 +43,24 @@ const addCityToSearches = (city) => {
   if (previousSearchesMemory !== null) {
     previousSearchesArray = JSON.parse(previousSearchesMemory);
   }
-  previousSearchesArray.unshift(city);
-  if (previousSearchesArray.length > 10) {
-    previousSearchesArray.pop();
+
+  let cityAlreadyExist = false;
+
+  const isExist = (index) => {
+    if (previousSearchesArray[index] === city) {
+      cityAlreadyExist = true;
+    }
+  };
+
+  $(previousSearchesArray).each(isExist);
+
+  if (cityAlreadyExist === false) {
+    previousSearchesArray.unshift(city);
+    if (previousSearchesArray.length > 10) {
+      previousSearchesArray.pop();
+    }
   }
+
   const uploadToMemory = JSON.stringify(previousSearchesArray);
   localStorage.setItem("previousSearches", uploadToMemory);
   renderSearchCards(previousSearchesArray);
